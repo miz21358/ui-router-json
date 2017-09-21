@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="script.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-app="MyApp">
+
+	<ons-page>
+        <!-- ツールバー -->
+		<ons-toolbar>
+			<div class="center">JSON読み込み</div>
+		</ons-toolbar>
+		
+        <!-- 画面のメイン部分 -->
+		<div ng-controller="JSONController">
+			<ons-button ng-click="readJSON();">JSON読み込み</ons-button>
+		</div>
+		
+        <!-- 遷移読込部分 -->
+		<div style="padding: 20px 10px;" ui-view></div>
+		
+        <!-- ローディング読込用ディレクティブ -->
+		<my-loader></my-loader>
+
+	</ons-page>
+	
+	<!-- リスト画面 -->
+	<ons-template id="list.html">
+		<h1>Flower List</h1>
+		<div ng-controller="ListController">
+			<h2 ng-repeat="(i, item) in list">
+				{{i}} : {{item.name}}
+			</h2>
+		</div>
+	</ons-template>
+	
+    <!-- ローディング画面 -->
+	<ons-template id="loader.html">
+		<div ng-if="$root.isLoading" class="loader-parent"><div class="loader">Loading...</div></div>
+	</ons-template>
+</body>	
+</html>
