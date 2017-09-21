@@ -34,6 +34,7 @@ myApp.controller('ListController', ['$scope', '$state', '$rootScope', 'JsonFlowe
 				// 結果リストが取れたら、スコープに設定
 				$scope.list = resultList;
 			}, function(response) {
+                // 取得に失敗したら、アラート
 				ons.notification.alert({
 					title: 'JSON取得失敗',
 					message: response
@@ -79,7 +80,7 @@ myApp.service('JsonFlowerService', ['$q', '$timeout', '$http', function($q, $tim
 				// 成功した場合、リストをまるごと返す
 				deferred.resolve(response.data.list);
 			}, function errorCallback(response) {
-				// 失敗した場合
+				// 失敗した場合、メッセージを返す
 				var msg = "JsonFlowerService json取得失敗: "+ response.status;
 				console.error(msg);
 				deferred.reject(msg);
